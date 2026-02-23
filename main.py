@@ -34,7 +34,12 @@ settings = {
         "csvFile": "powerData.csv"
     },
     "modbus": {
-        "targetIp": "",
+        "gateways":[
+          { 
+            "ip": "fe80::200:54ff:fee9:3aee",
+            "name": "Gateway1"
+          },
+        ],
         "port": 502,
         "retries": 3,
         "retryDelay": 0.3
@@ -224,13 +229,26 @@ def Run():
     global latestReadings
     InitStorage()
     
-    client = ModbusTcpClient(settings["modbus"]["targetIp"], port=settings["modbus"]["port"], framer=FramerType.SOCKET)
+    gateWays = settings["modbus"]["gateways"]
+    modbusClients = {}
+    modbusReaders = {}
     
-    if not client.connect():
-        logging.error("Modbus connection failed")
-        return
-
-    reader = ModbusReader(client, settings["modbus"]["retries"], settings["modbus"]["retryDelay"])
+    for gateway in gateWays:
+        gatewayIp = gateway["ip"]
+        gatewayName = gateway["name"]
+        
+        client = ModbusTcpClient(gatewayIp, port=settings["modbus"]["port"], framer=FramerType.SOCKET)
+        
+        modbusClients[gatewayName] = client
+    
+        if not client.connect():
+            logging.error("Modbus connection failed")
+            return
+    
+        reader = ModbusReader(client, settings["modbus"]["retries"], settings["modbus"]["retryDelay"])
+        
+        modbusReaders[gatewayName] = reader
+    
     discord = PowerTagDiscordNotifier(discordWebhookUrl)
     lastAlertTime = {}
 
@@ -243,6 +261,7 @@ def Run():
             for tagInfo in powertags:
                 deviceId = tagInfo["deviceId"]
                 tagName = tagInfo["tagName"]
+                gatewayName = tagInfo["gatewayName"]
                 
                 currentRow = {"Tag": tagName, "Timestamp": cycleStart}
                 
@@ -252,13 +271,14 @@ def Run():
                     regType = config.get("type", "float")
                     registerLength = config.get("length", "int")
                     
+                    registerReader = modbusReaders[gatewayName]
                     
                     if regType == "float":
-                        val = reader.ReadFloat(regAddr, deviceId, registerLength)
+                        val = registerReader.ReadFloat(regAddr, deviceId, registerLength)
                     elif regType == "ascii":
                         cacheKey = f"{tagName}_{key}"
                         if cycleStart - lastReadTime.get(cacheKey, 0) > asciiReadInterval:
-                            val = reader.ReadAscii(regAddr, deviceId, config["length"])
+                            val = registerReader.ReadAscii(regAddr, deviceId, config["length"])
                             if val:
                                 lastKnownValues[cacheKey] = val
                                 lastReadTime[cacheKey] = cycleStart
