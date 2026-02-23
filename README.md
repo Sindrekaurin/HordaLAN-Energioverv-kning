@@ -1,4 +1,4 @@
-# Modbus Power Monitor - Hordaland Edition
+# Modbus Power Monitor - HordaLAN
 
 Dette er en lettvektstjeneste utviklet for overvåking av elektriske parametere via Modbus TCP. Systemet er spesialisert for uthenting av data fra Schneider Electric PowerTags via gateway (EGX150, PAS600 etc), med fokus på stabilitet og enkel konfigurasjon.
 
