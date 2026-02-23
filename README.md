@@ -51,7 +51,12 @@ Systemet er enkelt bygget opp:
   },
 
   "modbus": {
-    "targetIp": "fe80::200:54ff:fee9:3aee", // Modbus server IP
+    "gateways":[
+      { 
+        "ip": "fe80::200:54ff:fee9:3aee", // Unik IP adresse for server
+        "name": "Gateway1" // Unikt navn for hver aktuelle server
+      }
+    ],
     "port": 502, // Modbus port
     "retries": 3, // Antall forsøk per spørring ved ugyldig respons
     "retryDelay": 0.3 // Minste forsinkelse mellom spørringer
@@ -61,6 +66,7 @@ Systemet er enkelt bygget opp:
     {
       "deviceId": 101, // Adresse for enhet
       "tagName": "powerTag1" // Nøkkel for objekt
+      "gatewayName": "Gateway1" // Knytning mellom måler og server
     },...
   ],
 
