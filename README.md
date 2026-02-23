@@ -26,7 +26,7 @@ Systemet er optimalisert og testet gjennom HordaLAN26 med gode resultater.
     python main.py
     ```
 
-## ⚙️ Konfigurasjon
+## Konfigurasjon
 
 Systemet er enkelt bygget opp:
 * **main.py**: Programfilen ansvarlig for kjøring av kjerne- og foretningslogikk.
