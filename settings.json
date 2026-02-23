@@ -1,0 +1,114 @@
+{
+  "discordWebhook": "https://discordapp.com/api/webhooks/1474805268037501099/DFu7T0t9wGvnHOUW_tRuR7UpdahglyyHWIy9BO6nvUzy6QSRCQxEEN_Y2xx-eyDvnP_M",
+  "pollInterval": 80.0,
+  "alertCooldown": 300,
+  "asciiReadInterval": 600,
+
+  "thresholds": {
+    "voltage": { "low": 200, "high": 250 },
+    "current": { "high": 13 }
+  },
+
+  "storage": {
+    "databaseConnection": "",
+    "csvFile": "powerData.csv"
+  },
+
+  "modbus": {
+    "gateways":[
+      { 
+        "ip": "fe80::200:54ff:fee9:3aee",
+        "name": "Gateway1"
+      }
+    ],
+    "port": 502,
+    "retries": 3,
+    "retryDelay": 0.3
+  },
+
+  "powertags": [
+    {
+      "deviceId": 101,
+      "tagName": "powerTag1",
+      "gatewayName": "Gateway1"
+    },
+    {
+      "deviceId": 102,
+      "tagName": "powerTag2",
+      "gatewayName": "Gateway1"
+    },
+    {
+      "deviceId": 103,
+      "tagName": "powerTag3",
+      "gatewayName": "Gateway1"
+    },
+    {
+      "deviceId": 104,
+      "tagName": "powerTag4",
+      "gatewayName": "Gateway1"
+    },
+    {
+      "deviceId": 105,
+      "tagName": "powerTag5",
+      "gatewayName": "Gateway1"
+    },
+    {
+      "deviceId": 106,
+      "tagName": "powerTag6",
+      "gatewayName": "Gateway1"
+    },
+    {
+      "deviceId": 107,
+      "tagName": "powerTag7",
+      "gatewayName": "Gateway1"
+    },
+    {
+      "deviceId": 108,
+      "tagName": "powerTag8",
+      "gatewayName": "Gateway1"
+    },
+    {
+      "deviceId": 109,
+      "tagName": "powerTag9",
+      "gatewayName": "Gateway1"
+    },
+    {
+      "deviceId": 110,
+      "tagName": "powerTag10",
+      "gatewayName": "Gateway1"
+    },
+    {
+      "deviceId": 111,
+      "tagName": "powerTag11",
+      "gatewayName": "Gateway1"
+    }
+  ],
+
+  "registerMap": {
+    "voltage": {
+      "register": 3027,
+      "length": 2,
+      "type": "float",
+      "registerType": "input"
+    },
+    "current": {
+      "register": 2999,
+      "length": 2,
+      "type": "float",
+      "registerType": "input"
+    },
+    "CircuitIdentifier": {
+      "register": 31010,
+      "length": 3,
+      "type": "ascii",
+      "registerType": "holding"
+    },
+    "UserApplicationName": {
+      "register": 31000,
+      "length": 10,
+      "type": "ascii",
+      "registerType": "holding"
+    }
+    
+  }
+}
