@@ -9,6 +9,8 @@ Dette er en lettvektstjeneste utviklet for overvåking av elektriske parametere 
 * **Delt Arkitektur**: Kjører datainnsamling og web-server i separate tråder for å sikre uavhengig drift.
 * **REST API**: Innebygd endepunkt som leverer de siste avlesningene i JSON-format for integrasjon mot dashboard eller andre systemer.
 
+<img width="349" height="388" alt="image" src="https://github.com/user-attachments/assets/7ee5534f-919b-478b-ba50-48868c01b73a" />
+
 ## Installasjon og Bruk
 
 Systemet er optimalisert og testet gjennom HordaLAN26 med gode resultater.
