@@ -46,8 +46,8 @@ Systemet er enkelt bygget opp:
   },
 
   "storage": {
-    "databaseConnection": "", // Future-on storage of database connection string
-    "csvFile": "powerData.csv" // Name of data storage file
+    "databaseConnection": "", // Fremtidig lagring for databasetilkoblingstreng
+    "csvFile": "powerData.csv" // Navn for lagringsfil
   },
 
   "modbus": {
